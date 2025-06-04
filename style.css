@@ -401,9 +401,9 @@ body {
   margin-right: 4px;
 }
 
-.ruby    { background: linear-gradient(#ff4881, #b0002f); border: 2px solid #ffd862; }
-.emerald { background: linear-gradient(#2afc89, #159653); border: 2px solid #ffd862; }
-.sapphire{ background: linear-gradient(#37abff, #1c3abf); border: 2px solid #ffd862; border-radius: 50%; }
+.netflix { background: linear-gradient(#ff4881, #b0002f); border: 2px solid #ffd862; }
+.spotify { background: linear-gradient(#2afc89, #159653); border: 2px solid #ffd862; }
+.youtube { background: linear-gradient(#37abff, #1c3abf); border: 2px solid #ffd862; border-radius: 50%; }
 .coin    { background: linear-gradient(#ffe27e, #caa22e); border: 2px solid #ffd862; border-radius: 50%; }
 .amethyst{ background: linear-gradient(#c864ff, #6711a6); border: 2px solid #ffd862; transform: rotate(45deg); }
 .amethyst-text { color: #af4ee7; font-weight: 700; }

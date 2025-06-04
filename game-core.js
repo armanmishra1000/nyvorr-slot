@@ -1,15 +1,20 @@
 // --- SYMBOLS & CANVAS SETUP ---
+// Image objects for icons
+let netflixImage = new Image();
+let spotifyImage = new Image();
+let youtubeImage = new Image();
+
 export const SYMBOLS = [
-    { name: "Ruby", color: "#ff225a", service: "Netflix", draw: drawRuby },
-    { name: "Emerald", color: "#22df71", service: "Spotify", draw: drawEmerald },
-    { name: "Sapphire", color: "#229aff", service: "YouTube Premium", draw: drawSapphire },
+    { name: "Netflix", service: "Netflix", draw: drawNetflixIcon, imagePath: "icons/netflix.png", imageRef: netflixImage },
+    { name: "Spotify", service: "Spotify", draw: drawSpotifyIcon, imagePath: "icons/spotify.png", imageRef: spotifyImage },
+    { name: "YouTube", service: "YouTube Premium", draw: drawYouTubeIcon, imagePath: "icons/YouTube.png", imageRef: youtubeImage },
     { name: "Amethyst", color: "#af4ee7", service: null, draw: drawAmethyst },
     { name: "Coin", color: "#ffe45c", service: "Credits", draw: drawCoin }
 ];
 export const SERVICE_MAPPING = {
-    Ruby: "Netflix",
-    Emerald: "Spotify",
-    Sapphire: "YouTube Premium",
+    Netflix: "Netflix",
+    Spotify: "Spotify",
+    YouTube: "YouTube Premium",
     Coin: "Credits",
     Amethyst: null
 };
@@ -128,6 +133,72 @@ export function drawCoin(ctx) {
     ctx.restore();
 }
 
+function drawNetflixIcon(ctx) {
+    if (netflixImage && netflixImage.complete && netflixImage.naturalWidth > 0) {
+        const aspectRatio = netflixImage.naturalWidth / netflixImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(netflixImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("NFX", 32, 36);
+    }
+}
+
+function drawSpotifyIcon(ctx) {
+    if (spotifyImage && spotifyImage.complete && spotifyImage.naturalWidth > 0) {
+        const aspectRatio = spotifyImage.naturalWidth / spotifyImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(spotifyImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("SPT", 32, 36);
+    }
+}
+
+function drawYouTubeIcon(ctx) {
+    if (youtubeImage && youtubeImage.complete && youtubeImage.naturalWidth > 0) {
+        const aspectRatio = youtubeImage.naturalWidth / youtubeImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(youtubeImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("YT", 32, 36);
+    }
+}
+
 // --- REEL AND RENDER LOGIC ---
 export function initReels(randSymbol) {
     reels = [];
@@ -197,4 +268,22 @@ export function spinReel(reel, targetSymbols, cb, randSymbol, renderReels) {
 
 export function randSymbol() {
     return REEL_SYMBOL_DISTRIBUTION[Math.floor(Math.random()*REEL_SYMBOL_DISTRIBUTION.length)];
+}
+
+export function preloadSymbolImages() {
+    const promises = [];
+    SYMBOLS.forEach(symbol => {
+        if (symbol.imagePath && symbol.imageRef) {
+            const promise = new Promise((resolve) => {
+                symbol.imageRef.onload = () => resolve(symbol.imageRef);
+                symbol.imageRef.onerror = () => {
+                    console.error("Failed to load image:", symbol.imagePath);
+                    resolve(null);
+                };
+                symbol.imageRef.src = symbol.imagePath;
+            });
+            promises.push(promise);
+        }
+    });
+    return Promise.all(promises);
 }
