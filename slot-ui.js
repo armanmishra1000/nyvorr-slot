@@ -180,8 +180,7 @@ export async function setupSlotUI() {
         }
         function handleMatch(symbolIdx, count, positions, winHighlightsArr) {
             const symbol = SYMBOLS[symbolIdx];
-            if (symbol.name === "ChatGPT") return;
-            if (["Netflix", "Spotify", "YouTube"].includes(symbol.name)) {
+            if (["Netflix", "Spotify", "YouTube", "ChatGPT"].includes(symbol.name)) {
                 let percent = 0;
                 if (count === 3) percent = 30;
                 else if (count === 4) percent = 80;
