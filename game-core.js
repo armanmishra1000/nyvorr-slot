@@ -12,6 +12,7 @@ export const SYMBOLS = [
     { name: "YouTube", service: "YouTube Premium", draw: drawYouTubeIcon, imagePath: "icons/YouTube.png", imageRef: youtubeImage },
     { name: "ChatGPT", service: "AI Tool", draw: drawChatGPTIcon, imagePath: "icons/chatgpt.png", imageRef: chatgptImage },
     { name: "Coin", service: "Credits", draw: drawCoinIcon, imagePath: "icons/coin.png", imageRef: coinImage }
+
 ];
 export const SERVICE_MAPPING = {
     Netflix: "Netflix",
@@ -19,6 +20,7 @@ export const SERVICE_MAPPING = {
     YouTube: "YouTube Premium",
     ChatGPT: "AI Tool",
     Coin: "Credits"
+
 };
 export const REEL_SYMBOL_DISTRIBUTION = [0,1,2,3,4,4,4,3,3,2,1,0,4,4,2,3,1,2,0,2];
 export const PAYLINES = [
