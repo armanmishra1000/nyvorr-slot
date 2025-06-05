@@ -1,17 +1,24 @@
 // --- SYMBOLS & CANVAS SETUP ---
+// Image objects for icons
+let netflixImage = new Image();
+let spotifyImage = new Image();
+let youtubeImage = new Image();
+let chatgptImage = new Image();
+let coinImage = new Image();
+
 export const SYMBOLS = [
-    { name: "Ruby", color: "#ff225a", service: "Netflix", draw: drawRuby },
-    { name: "Emerald", color: "#22df71", service: "Spotify", draw: drawEmerald },
-    { name: "Sapphire", color: "#229aff", service: "YouTube Premium", draw: drawSapphire },
-    { name: "Amethyst", color: "#af4ee7", service: null, draw: drawAmethyst },
-    { name: "Coin", color: "#ffe45c", service: "Credits", draw: drawCoin }
+    { name: "Netflix", service: "Netflix", draw: drawNetflixIcon, imagePath: "icons/netflix.png", imageRef: netflixImage },
+    { name: "Spotify", service: "Spotify", draw: drawSpotifyIcon, imagePath: "icons/spotify.png", imageRef: spotifyImage },
+    { name: "YouTube", service: "YouTube Premium", draw: drawYouTubeIcon, imagePath: "icons/YouTube.png", imageRef: youtubeImage },
+    { name: "ChatGPT", service: "AI Tool", draw: drawChatGPTIcon, imagePath: "icons/chatgpt.png", imageRef: chatgptImage },
+    { name: "Coin", service: "Credits", draw: drawCoinIcon, imagePath: "icons/coin.png", imageRef: coinImage }
 ];
 export const SERVICE_MAPPING = {
-    Ruby: "Netflix",
-    Emerald: "Spotify",
-    Sapphire: "YouTube Premium",
-    Coin: "Credits",
-    Amethyst: null
+    Netflix: "Netflix",
+    Spotify: "Spotify",
+    YouTube: "YouTube Premium",
+    ChatGPT: "AI Tool",
+    Coin: "Credits"
 };
 export const REEL_SYMBOL_DISTRIBUTION = [0,1,2,3,4,4,4,3,3,2,1,0,4,4,2,3,1,2,0,2];
 export const PAYLINES = [
@@ -39,93 +46,115 @@ export function setAnimating(val) { animating = val; }
 export function getAnimating() { return animating; }
 
 // --- SYMBOL DRAWING ---
-export function drawRuby(ctx) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(32, 4); ctx.lineTo(60,22); ctx.lineTo(52,56); ctx.lineTo(12,56); ctx.lineTo(4,22); ctx.closePath();
-    ctx.fillStyle = "#ff2969";
-    ctx.shadowColor = "#ff8abc"; ctx.shadowBlur = 16;
-    ctx.fill();
-    ctx.restore();
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(32, 8); ctx.lineTo(56,22); ctx.lineTo(48,52); ctx.lineTo(16,52); ctx.lineTo(8,22); ctx.closePath();
-    ctx.fillStyle = "#f44";
-    ctx.globalAlpha = 0.7;
-    ctx.fill();
-    ctx.restore();
+
+function drawNetflixIcon(ctx) {
+    if (netflixImage && netflixImage.complete && netflixImage.naturalWidth > 0) {
+        const aspectRatio = netflixImage.naturalWidth / netflixImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(netflixImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("NFX", 32, 36);
+    }
 }
-export function drawEmerald(ctx) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(32,4); ctx.lineTo(60,32); ctx.lineTo(32,60); ctx.lineTo(4,32); ctx.closePath();
-    ctx.fillStyle = "#27ff89";
-    ctx.shadowColor = "#9fffcd"; ctx.shadowBlur = 16;
-    ctx.fill();
-    ctx.restore();
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(32,8); ctx.lineTo(56,32); ctx.lineTo(32,56); ctx.lineTo(8,32); ctx.closePath();
-    ctx.fillStyle = "#158f49";
-    ctx.globalAlpha = 0.7;
-    ctx.fill();
-    ctx.restore();
+
+function drawSpotifyIcon(ctx) {
+    if (spotifyImage && spotifyImage.complete && spotifyImage.naturalWidth > 0) {
+        const aspectRatio = spotifyImage.naturalWidth / spotifyImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(spotifyImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("SPT", 32, 36);
+    }
 }
-export function drawSapphire(ctx) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(32, 32, 28, 0, Math.PI * 2);
-    ctx.fillStyle = "#25a1ef";
-    ctx.shadowColor = "#a0e3ff"; ctx.shadowBlur = 15;
-    ctx.fill();
-    ctx.restore();
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(32, 32, 19, 0, Math.PI * 2);
-    ctx.fillStyle = "#174ca6";
-    ctx.globalAlpha = 0.45;
-    ctx.fill();
-    ctx.restore();
+
+function drawYouTubeIcon(ctx) {
+    if (youtubeImage && youtubeImage.complete && youtubeImage.naturalWidth > 0) {
+        const aspectRatio = youtubeImage.naturalWidth / youtubeImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(youtubeImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("YT", 32, 36);
+    }
 }
-export function drawAmethyst(ctx) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(32, 6); ctx.lineTo(52, 32); ctx.lineTo(32, 58); ctx.lineTo(12, 32); ctx.closePath();
-    ctx.fillStyle = "#af4ee7";
-    ctx.shadowColor = "#c497ff"; ctx.shadowBlur = 12;
-    ctx.fill();
-    ctx.restore();
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(32, 14); ctx.lineTo(46, 32); ctx.lineTo(32, 50); ctx.lineTo(18, 32); ctx.closePath();
-    ctx.fillStyle = "#4d1859";
-    ctx.globalAlpha = 0.6;
-    ctx.fill();
-    ctx.restore();
+
+function drawChatGPTIcon(ctx) {
+    if (chatgptImage && chatgptImage.complete && chatgptImage.naturalWidth > 0) {
+        const aspectRatio = chatgptImage.naturalWidth / chatgptImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(chatgptImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#777";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("GPT", 32, 36);
+    }
 }
-export function drawCoin(ctx) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(32,32,28,0,2*Math.PI);
-    ctx.fillStyle = "#ffe45c";
-    ctx.shadowColor = "#fff5c0"; ctx.shadowBlur = 12;
-    ctx.fill();
-    ctx.restore();
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(32,32,19,0,2*Math.PI);
-    ctx.fillStyle = "#c7ad23";
-    ctx.globalAlpha = 0.75;
-    ctx.fill();
-    ctx.restore();
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(41,25,7,Math.PI*0.5,Math.PI*1.5);
-    ctx.strokeStyle = "#fff";
-    ctx.globalAlpha = 0.16;
-    ctx.lineWidth = 3.5;
-    ctx.stroke();
-    ctx.restore();
+
+function drawCoinIcon(ctx) {
+    if (coinImage && coinImage.complete && coinImage.naturalWidth > 0) {
+        const aspectRatio = coinImage.naturalWidth / coinImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(coinImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#777";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("CN", 32, 36);
+    }
 }
 
 // --- REEL AND RENDER LOGIC ---
@@ -197,4 +226,22 @@ export function spinReel(reel, targetSymbols, cb, randSymbol, renderReels) {
 
 export function randSymbol() {
     return REEL_SYMBOL_DISTRIBUTION[Math.floor(Math.random()*REEL_SYMBOL_DISTRIBUTION.length)];
+}
+
+export function preloadSymbolImages() {
+    const promises = [];
+    SYMBOLS.forEach(symbol => {
+        if (symbol.imagePath && symbol.imageRef) {
+            const promise = new Promise((resolve) => {
+                symbol.imageRef.onload = () => resolve(symbol.imageRef);
+                symbol.imageRef.onerror = () => {
+                    console.error("Failed to load image:", symbol.imagePath);
+                    resolve(null);
+                };
+                symbol.imageRef.src = symbol.imagePath;
+            });
+            promises.push(promise);
+        }
+    });
+    return Promise.all(promises);
 }

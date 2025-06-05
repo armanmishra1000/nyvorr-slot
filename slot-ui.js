@@ -1,6 +1,6 @@
 import {
     SYMBOLS, REELS, ROWS, reels, winLines, winningSymbols, clearWinLines, clearWinningSymbols,
-    initReels, renderReels, spinReel, randSymbol,
+    initReels, renderReels, spinReel, randSymbol, preloadSymbolImages,
     setAnimating, getAnimating,
     P, DIVIDER_W, REEL_W, SYMBOL_H, CANVAS_W, CANVAS_H
 } from './game-core.js';
@@ -13,7 +13,7 @@ export let state;
 export let balance, lastWin, streak, lastBonus, currentBet;
 export let bonusTimer = null, canBonus = false;
 
-export function setupSlotUI() {
+export async function setupSlotUI() {
     // --- UI elements ---
     const canvas = document.getElementById("slot-canvas");
     const canvasContainer = document.querySelector(".slot-canvas-container");
@@ -64,6 +64,9 @@ export function setupSlotUI() {
         betAmountInputEl.value = currentBet;
         save();
     });
+
+    // Load symbol images before initializing reels
+    await preloadSymbolImages();
 
     // INIT
     initReels(randSymbol);
@@ -177,8 +180,8 @@ export function setupSlotUI() {
         }
         function handleMatch(symbolIdx, count, positions, winHighlightsArr) {
             const symbol = SYMBOLS[symbolIdx];
-            if (symbol.name === "Amethyst") return;
-            if (["Ruby", "Emerald", "Sapphire"].includes(symbol.name)) {
+            if (symbol.name === "ChatGPT") return;
+            if (["Netflix", "Spotify", "YouTube"].includes(symbol.name)) {
                 let percent = 0;
                 if (count === 3) percent = 30;
                 else if (count === 4) percent = 80;
