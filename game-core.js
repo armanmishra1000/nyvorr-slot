@@ -12,6 +12,7 @@ export const SYMBOLS = [
     { name: "YouTube", service: "YouTube Premium", draw: drawYouTubeIcon, imagePath: "icons/YouTube.png", imageRef: youtubeImage },
     { name: "ChatGPT", service: "AI Tool", draw: drawChatGPTIcon, imagePath: "icons/chatgpt.png", imageRef: chatgptImage },
     { name: "Coin", service: "Credits", draw: drawCoinIcon, imagePath: "icons/coin.png", imageRef: coinImage }
+
 ];
 export const SERVICE_MAPPING = {
     Netflix: "Netflix",
@@ -19,6 +20,7 @@ export const SERVICE_MAPPING = {
     YouTube: "YouTube Premium",
     ChatGPT: "AI Tool",
     Coin: "Credits"
+
 };
 export const REEL_SYMBOL_DISTRIBUTION = [0,1,2,3,4,4,4,3,3,2,1,0,4,4,2,3,1,2,0,2];
 export const PAYLINES = [
@@ -154,6 +156,72 @@ function drawCoinIcon(ctx) {
         ctx.font = "12px Arial";
         ctx.textAlign = "center";
         ctx.fillText("CN", 32, 36);
+    }
+}
+
+function drawNetflixIcon(ctx) {
+    if (netflixImage && netflixImage.complete && netflixImage.naturalWidth > 0) {
+        const aspectRatio = netflixImage.naturalWidth / netflixImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(netflixImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("NFX", 32, 36);
+    }
+}
+
+function drawSpotifyIcon(ctx) {
+    if (spotifyImage && spotifyImage.complete && spotifyImage.naturalWidth > 0) {
+        const aspectRatio = spotifyImage.naturalWidth / spotifyImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(spotifyImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("SPT", 32, 36);
+    }
+}
+
+function drawYouTubeIcon(ctx) {
+    if (youtubeImage && youtubeImage.complete && youtubeImage.naturalWidth > 0) {
+        const aspectRatio = youtubeImage.naturalWidth / youtubeImage.naturalHeight;
+        let w = 64, h = 64;
+        if (aspectRatio > 1) {
+            h = 64 / aspectRatio;
+        } else {
+            w = 64 * aspectRatio;
+        }
+        const xOffset = (64 - w) / 2;
+        const yOffset = (64 - h) / 2;
+        ctx.drawImage(youtubeImage, xOffset, yOffset, w, h);
+    } else {
+        ctx.fillStyle = "#555";
+        ctx.fillRect(0, 0, 64, 64);
+        ctx.fillStyle = "white";
+        ctx.font = "12px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("YT", 32, 36);
     }
 }
 
